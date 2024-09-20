@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Liste des stations | Essence moins cher</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="./assets/css/style.css" />
+        <style>
+            .main-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                margin-top: 50px;
+            }
+    
+            .geo-section {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 50px;
+                border: solid 1px black;
+            }
+            .separator {
+                font-size: 20px;
+                padding: 0 20px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="ville.html">Ville</a></li>
+                <li><a href="a_proximite.html">A proximité</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <div class="container main-container">
+                <!-- Geolocation and Postal Code Section -->
+                <div class="w-100 geo-section" style="display: grid; grid-template-columns: 45% 10% 45%;">
+                    <div class="bouton_chercher_stations" style="cursor: pointer; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        En attente d'acceptation de géolocalisation
+                    </div>
+                    <div class="separator" style="width: 100%;">
+                        ou
+                    </div>
+                    <div class="bouton_chercher_stations" style="cursor: pointer; width: 100%;">
+                        Renseigner mon code postal
+                        <input type="text" placeholder="Code postal" style="cursor: pointer; max-width: 100%;">
+                    </div>
+                </div>
+        
+                <!-- Nearest Station Section -->
+                <div class="row price-indicator">
+                    <h3>Trouver une station essence à proximité</h3>
+                    <p><span class="dot"></span> Indique le prix le plus bas pour chaque type de carburant.</p>
+                </div>
+            </div>
+    
+            <div class="mt-5" style="margin-left: 50px; margin-right: 50px; display: flex; flex-direction: column;">
+                <button class="bouton_chercher_stations text-start" data-bs-toggle="collapse" href="#collapseParagraph2" role="button" aria-expanded="false" aria-controls="collapseParagraph2" style="max-width: 100%; display: flex; align-items: center; justify-content: space-between;">
+                    Qu'est-ce que la géolocalisation sur Essence moins cher ?
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                      </svg>
+                </button>
+                <div class="collapse mt-3" id="collapseParagraph2">
+                    <p class="text-start">
+                        C'est une fonction qui localise l'utilisateur pour lui montrer des contenus ou services proches de lui.
+                    </p>                        
+                </div>
+            </div>
+
+            <div class="mt-5" style="margin-left: 50px; margin-right: 50px; display: flex; flex-direction: column;">
+                <button class="bouton_chercher_stations text-start" data-bs-toggle="collapse" href="#collapseParagraph3" role="button" aria-expanded="false" aria-controls="collapseParagraph3" style="max-width: 100%; display: flex; align-items: center; justify-content: space-between;">
+                    Comment la géolocalisation améliore-t-elle Essence moins cher ?
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                      </svg>
+                </button>
+                <div class="collapse mt-3" id="collapseParagraph3">
+                    <p class="text-start">
+                        Elle personnalise l'expérience en affichant les stations essence locales rendant le site plus utile.
+                    </p>                        
+                </div>
+            </div>
+    
+            <div class="mt-5" style="margin-left: 50px; margin-right: 50px; display: flex; flex-direction: column;">
+                <button class="bouton_chercher_stations text-start" data-bs-toggle="collapse" href="#collapseParagraph4" role="button" aria-expanded="false" aria-controls="collapseParagraph4" style="max-width: 100%; display: flex; align-items: center; justify-content: space-between;">
+                    La géolocalisation est-elle sécurisée pour les utilisateurs ? 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                      </svg>
+                </button>
+                <div class="collapse mt-3" id="collapseParagraph4">
+                    <p class="text-start">
+                        Oui, le site demande le consentement de l'utilisateur et utilise HTTPS pour protéger vos données.
+                    </p>                        
+                </div>
+            </div>
+            
+        </main>
+
+        <footer>
+            <section class="contact">
+                <div class="contact-container">
+                    <div class="contact-list">
+                        <div class="list">
+                            <div id="contact-img">
+                                <img
+                                    src="./assets/img/site_logo_essence.png"
+                                    alt="logo-end"
+                                />
+                            </div>
+                        </div>
+                        <div class="list">
+                            <h5>LIENS RAPIDES</h5>
+                            <ul class="infos-p">
+                                <li><a href="about.html">A propos</a></li>
+                                <li>
+                                    <a href="politique_confiden.html"
+                                        >Politique de confidentialité</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="termes_et_conditions.html"
+                                        >Termes et conditions</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="mentions_legales.html"
+                                        >Mentions Légales</a
+                                    >
+                                </li>
+                                <li><a href="contact.html">Contactez-nous</a></li>
+                            </ul>
+                        </div>
+                        <div class="list">
+                            <h5>DECOUVRIR</h5>
+                            <ul>
+                                <li>Stations essence à Mendive</li>
+                                <li>Stations essence à Autainville</li>
+                                <li>Stations essence à Villers Saint Sépulcre</li>
+                                <li>Stations essence à Saint Martin l'Astier</li>
+                                <li>Stations essence à La Forêt de Tessé</li>
+                                <li>Stations essence à Luglon</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <h5>Copyright © 2024 Station All Rights Reserved.</h5>
+        </footer>
+
+        <!-- Bootstrap JS and FontAwesome -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contactez-nous | Essence moins cher</title>
+    <!-- Lien vers Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Lien vers une icône Bootstrap pour les témoignages -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css">
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <ul>
+        <li><a href="index.html">Accueil</a>> Contactez-nous</li>
+        <li><a href="ville.html">Ville</a></li>
+        <li><a href="a_proximite.html">A proximité</a></li>
+      </ul>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Contactez-nous</h2>
+        <form class="d-flex flex-column">
+            <div class="d-flex text-left justify-content-center">
+                <!-- Nom -->
+                <div class="mb-3" style="width: 22%; margin-right: 3%;">
+                  <label for="name" class="form-label ">Nom</label>
+                  <input type="text" class="form-control" id="name" placeholder="Votre nom" required>
+                </div>
+            
+                <!-- Email -->
+                <div class="mb-3" style="width: 22%; margin-left: 3%;">
+                  <label for="email" class="form-label">Adresse e-mail</label>
+                  <input type="email" class="form-control" id="email" placeholder="Votre adresse e-mail" required>
+                </div>
+            </div>
+      
+            <div class="d-flex flex-column align-items-center">
+                <!-- Sujet -->
+                <div class="mb-3 text-left" style="width: 50%;">
+                  <label for="subject" class="form-label">Sujet</label>
+                  <input type="text" class="form-control" id="subject" placeholder="Sujet de votre message" required>
+                </div>
+            
+                <!-- Message -->
+                <div class="mb-3 text-left" style="width: 50%;">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea class="form-control" id="message" rows="5" placeholder="Votre message" required style="resize: none;"></textarea>
+                </div>
+            </div>
+      
+          <div>
+              <!-- Bouton d'envoi -->
+              <button type="submit" class="bouton_chercher_stations">Envoyer</button>
+          </div>
+        </form>
+      </div>
+      
+    <!-- Footer -->
+    <footer>
+      <section class="contact"></section>
+        <div class="contact-container">
+          <div class="contact-list">
+            <div class="list">
+              <div id="contact-img">
+                <img src="./assets/img/site_logo_essence.png" alt="logo-end" />
+              </div>
+            </div>
+            <div class="list">
+              <h5>LIENS RAPIDES</h5>
+              <ul class="infos-p">
+                <li><a href="about.html">A propos</a></li>
+                <li><a href="politique_confiden.html">Politique de confidentialité</a></li>
+                <li><a href="termes_et_conditions.html">Termes et conditions</a></li>
+                <li><a href="mentions_legales.html">Mentions Légales</a></li>
+                <li><a href="contact.html">Contactez-nous</a></li>
+              </ul>
+            </div>
+            <div class="list">
+              <h5>DECOUVRIR</h5>
+              <ul>
+                <li>Stations essence à Mendive</li>
+                <li>Stations essence à Autainville</li>
+                <li>Stations essence à Villers Saint Sépulcre</li>
+                <li>Stations essence à Saint Martin l'Astier</li>
+                <li>Stations essence à La Forêt de Tessé</li>
+                <li>Stations essence à Luglon</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+      <h5>Copyright © 2024 Station All Rights Reserved.</h5>
+    </footer>
+
+    <!-- Lien vers Bootstrap JS et les dépendances -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphique Courbe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        canvas {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myChart" style="width: 700px; height: 700px;"></canvas>
+
+    <!-- Ajout de Chart.js via un CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+
+        const myChart = new Chart(ctx, {
+            type: 'line', // Type du graphique (ligne/courbe)
+            data: {
+                labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil'], // Légendes des axes
+                datasets: [{
+                    label: 'Ventes 2023',
+                    data: [12, 19, 3, 5, 2, 3, 12], // Données pour les points
+                    borderColor: 'rgba(75, 192, 192, 1)', // Couleur de la courbe
+                    borderWidth: 2,
+                    fill: false // Remplissage sous la courbe
+                }, {
+                    label: 'Ventes 2024',
+                    data: [22, 10, 5, 7, 9, 4, 15],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

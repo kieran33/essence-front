@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moyenne des Prix des Carburants</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .price-table {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    .price-header {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .price-header img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .price-cell {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .gazole {
+      background-color: #ff8c00;
+    }
+
+    .sp95 {
+      background-color: #7dd300;
+    }
+
+    .sp98 {
+      background-color: #004c27;
+    }
+
+    .gplc {
+      background-color: #007db7;
+    }
+
+    .e10 {
+      background-color: #66b032;
+    }
+
+    .e85 {
+      background-color: #00c9dd;
+    }
+
+    .price {
+      background-color: #f9f9f9;
+      font-size: 1.2rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container my-4">
+    <div class="price-table">
+      <div class="price-header d-flex align-items-center">
+        <img src="https://via.placeholder.com/40" alt="Fuel Icon"> <!-- Placeholder for fuel icon -->
+        Moyenne des prix
+      </div>
+
+      <div class="price-row">
+        <div class="price-cell gazole">Gazole</div>
+        <div class="price-cell sp95">SP95</div>
+        <div class="price-cell sp98">SP98</div>
+        <div class="price-cell gplc">GPLc</div>
+        <div class="price-cell e10">E10</div>
+        <div class="price-cell e85">E85</div>
+      </div>
+
+      <div class="price-row">
+        <div class="price-cell price">1.612 €</div>
+        <div class="price-cell price">1.756 €</div>
+        <div class="price-cell price">1.800 €</div>
+        <div class="price-cell price">1.011 €</div>
+        <div class="price-cell price">1.700 €</div>
+        <div class="price-cell price">0.821 €</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
