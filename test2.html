@@ -1,97 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Station Info</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <!-- FontAwesome for Icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-  <style>
-    .station-card {
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 20px;
-      background-color: #fff;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Géolocalisation avec Carte</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
 
-    .station-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .station-header img {
-      height: 50px;
-    }
-
-    .station-info {
-      margin-bottom: 20px;
-    }
-
-    .price {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #333;
-    }
-
-    .services i {
-      font-size: 1.5rem;
-      margin-right: 15px;
-      color: #666;
-    }
-
-    .action-buttons {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 20px;
-    }
-  </style>
+    <!-- Custom CSS to set map size -->
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="container my-4">
-    <div class="station-card">
-      <div class="station-header">
-        <div>
-          <h5>E.Leclerc - E. Leclerc Chantonnay</h5>
-          <p>Za Polaris Nord<br>85110 Chantonnay</p>
-        </div>
-        <div>
-          <span class="price">1,689 €/L</span><br>
-          <small>Sans Plomb 98 (E5)<br>20/09/24</small>
-        </div>
-      </div>
+  <div class="container mt-5">
+    <h1 class="text-center">Ma Position Actuelle sur la Carte</h1>
+    <p id="coords" class="text-center">Latitude et Longitude seront affichées ici...</p>
 
-      <div class="station-info">
-        <div class="services">
-          <i class="fas fa-gas-pump"></i>
-          <i class="far fa-clock"></i>
-          <i class="fas fa-tools"></i>
-          <i class="fas fa-credit-card"></i>
-          <i class="fas fa-truck"></i>
-          <i class="fas fa-oil-can"></i>
-        </div>
-      </div>
-
-      <div class="action-buttons">
-        <button class="btn btn-outline-primary">
-          <i class="fas fa-map-marker-alt"></i> Afficher sur la carte
-        </button>
-        <button class="btn btn-outline-secondary">
-          <i class="fas fa-eye"></i> Afficher le détail
-        </button>
-        <button class="btn btn-outline-danger">
-          <i class="fas fa-exclamation-circle"></i> Signaler en pénurie
-        </button>
-      </div>
-    </div>
+    <!-- Carte Leaflet -->
+    <div id="map"></div>
   </div>
 
-  <!-- Bootstrap and FontAwesome JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    
+    <!-- JavaScript de géolocalisation et affichage de la carte -->
+    <script>
+        function initMap(latitude, longitude) {
+            // Crée la carte et centre-la sur les coordonnées de l'utilisateur
+            var map = L.map('map').setView([latitude, longitude], 13);
+
+            // Ajouter une couche de base de carte (OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Ajouter un marqueur à la position de l'utilisateur
+            var marker = L.marker([latitude, longitude]).addTo(map);
+            marker.bindPopup("<b>Vous êtes ici !</b><br>Latitude: " + latitude + "<br>Longitude: " + longitude).openPopup();
+        }
+
+        // Fonction de géolocalisation
+        function geolocalisation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success, error);
+            } else {
+                document.getElementById('coords').textContent = "La géolocalisation n'est pas supportée par ce navigateur.";
+            }
+
+            function success(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                // Affiche les coordonnées
+                document.getElementById('coords').textContent = "Latitude : " + latitude + ", Longitude : " + longitude;
+
+                // Initialise la carte avec les coordonnées
+                initMap(latitude, longitude);
+            }
+
+            function error() {
+                document.getElementById('coords').textContent = "Impossible d'obtenir la position.";
+            }
+        }
+
+        // Appel de la fonction au chargement de la page
+        window.onload = geolocalisation;
+    </script>
+
 </body>
 </html>
