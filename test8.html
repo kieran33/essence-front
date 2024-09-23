@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affichage de la Ville avec Leaflet</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h1 class="text-center">Affichez une ville sur la carte</h1>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <input type="text" id="cityInput" class="form-control" placeholder="Entrez le nom d'une ville">
+                    <button class="btn btn-primary" id="searchBtn">Rechercher</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+    <!-- JavaScript pour la carte -->
+    <script>
+        // Initialiser la carte
+        var map = L.map('map').setView([48.8566, 2.3522], 5); // Vue initiale sur Paris
+
+        // Ajouter les tuiles OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Fonction pour rechercher une ville
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            var city = document.getElementById('cityInput').value;
+
+            if (city) {
+                var url = `https://nominatim.openstreetmap.org/search?format=json&q=${city}`;
+
+                fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        var lat = data[0].lat;
+                        var lon = data[0].lon;
+
+                        // Recentrer la carte sur la ville
+                        map.setView([lat, lon], 10);
+
+                        // Ajouter un marqueur pour la ville
+                        L.marker([lat, lon]).addTo(map)
+                            .bindPopup(`<b>${city}</b><br>Latitude: ${lat}<br>Longitude: ${lon}`)
+                            .openPopup();
+                    } else {
+                        alert("Ville non trouvée !");
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                });
+            } else {
+                alert("Veuillez entrer une ville.");
+            }
+        });
+    </script>
+</body>
+</html>
