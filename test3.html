@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demande de Géolocalisation</title>
+    <!-- Intégrer Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container text-center mt-5">
+    <h2>Activer la Géolocalisation</h2>
+    <button id="geolocation-btn" class="btn btn-primary mt-3">Demander la Géolocalisation</button>
+    <p id="location-status" class="mt-3"></p>
+</div>
+
+<!-- Intégrer Bootstrap JS et Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Script JavaScript -->
+<script>
+    document.getElementById("geolocation-btn").addEventListener("click", function () {
+        // Vérifier si le navigateur supporte la géolocalisation
+        if (navigator.geolocation) {
+            document.getElementById("location-status").innerText = "Demande de géolocalisation en cours...";
+            
+            // Demande de position
+            navigator.geolocation.getCurrentPosition(success, error);
+        } else {
+            document.getElementById("location-status").innerText = "La géolocalisation n'est pas supportée par ce navigateur.";
+        }
+    });
+
+    // Fonction appelée en cas de succès de la géolocalisation
+    function success(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        document.getElementById("location-status").innerText = `Localisation réussie ! Latitude: ${latitude}, Longitude: ${longitude}`;
+    }
+
+    // Fonction appelée en cas d'échec de la géolocalisation
+    function error() {
+        document.getElementById("location-status").innerText = "Impossible d'obtenir la géolocalisation.";
+    }
+</script>
+
+</body>
+</html>
