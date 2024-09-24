@@ -3,47 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jours de la semaine avec horaires</title>
+    <title>Station E.Leclerc</title>
+    
+    <!-- Inclure Leaflet.js pour la carte -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <style>
+        /* Style pour la carte */
+        #map {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
-<h3>Jours de la semaine avec horaires :</h3>
-<ul id="jours-semaine">
-    <!-- Les jours et horaires seront ajoutés ici -->
-</ul>
+    <div class="station">
+        <h2>E.Leclerc - E.Leclerc Chantonnay</h2>
+        <p>Za Polaris Nord<br>85110 Chantonnay</p>
+        
+        <div>
+            <button id="show-map-btn">AFFICHER SUR LA CARTE</button>
+        </div>
+    </div>
 
-<script>
-    function afficherJoursSemaineEtHoraires() {
-        // Tableau contenant les jours de la semaine avec leurs horaires
-        const joursHoraires = [
-            { jour: "Lundi", horaires: "08h00 - 18h00" },
-            { jour: "Mardi", horaires: "08h00 - 18h00" },
-            { jour: "Mercredi", horaires: "08h00 - 18h00" },
-            { jour: "Jeudi", horaires: "08h00 - 18h00" },
-            { jour: "Vendredi", horaires: "08h00 - 18h00" },
-            { jour: "Samedi", horaires: "09h00 - 13h00" },
-            { jour: "Dimanche", horaires: "Fermé" }
-        ];
+    <!-- Conteneur pour afficher la carte -->
+    <div id="map" style="display: none;"></div>
 
-        // Sélection de la balise <ul> où les éléments <li> seront insérés
-        const ulElement = document.getElementById('jours-semaine');
-
-        // Boucle à travers la liste des jours avec leurs horaires
-        joursHoraires.forEach(function(jourHoraire) {
-            // Création d'un élément <li> pour chaque jour
-            const liElement = document.createElement('li');
+    <script>
+        // Fonction pour afficher la carte
+        function afficherCarte() {
+            // Afficher la div contenant la carte
+            document.getElementById('map').style.display = 'block';
             
-            // Texte à afficher : "Jour : Horaire"
-            liElement.textContent = `${jourHoraire.jour} : ${jourHoraire.horaires}`;
-            
-            // Ajoute l'élément <li> au <ul>
-            ulElement.appendChild(liElement);
-        });
-    }
+            // Coordonnées de l'adresse spécifiée (Avenue François Pignier, 01000 Bourg-En-Bresse, France)
+            const coords = [46.2056, 5.2288]; // Lat: 46.2056, Lng: 5.2288
 
-    // Appelle la fonction pour afficher les jours et horaires
-    afficherJoursSemaineEtHoraires();
-</script>
+            // Initialiser la carte
+            const map = L.map('map').setView(coords, 15);
+
+            // Ajouter la couche de tuiles OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Ajouter un marqueur à l'adresse spécifiée
+            L.marker(coords).addTo(map)
+                .bindPopup("Station essence E.Leclerc<br>Avenue François Pignier<br>01000 Bourg-En-Bresse, France")
+                .openPopup();
+        }
+
+        // Ajouter un écouteur d'événement au bouton
+        document.getElementById('show-map-btn').addEventListener('click', afficherCarte);
+    </script>
 
 </body>
 </html>
