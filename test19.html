@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Géolocalisation et récupération de la ville</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Géolocalisation de l'utilisateur</h1>
+  <button id="getLocation">Obtenir ma ville</button>
+  <div id="result"></div>
+  <div id="map"></div>
+  
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Fonction pour obtenir la géolocalisation et récupérer la ville
+    document.getElementById('getLocation').addEventListener('click', function() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+
+          // Afficher la carte centrée sur la position de l'utilisateur
+          const map = L.map('map').setView([lat, lng], 13);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap contributors'
+          }).addTo(map);
+
+          // Ajouter un marqueur à la position de l'utilisateur
+          L.marker([lat, lng]).addTo(map)
+            .bindPopup('Vous êtes ici!')
+            .openPopup();
+
+          // Appeler l'API Nominatim pour obtenir le nom de la ville
+          fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+            .then(response => response.json())
+            .then(data => {
+              const city = data.address.city || data.address.town || data.address.village || "Ville non trouvée";
+              document.getElementById('result').innerText = `Vous êtes à proximité de : ${city}`;
+            })
+            .catch(error => {
+              console.error('Erreur lors de la récupération des données de la ville:', error);
+              document.getElementById('result').innerText = "Erreur lors de la récupération des données de la ville.";
+            });
+        }, function(error) {
+          console.error('Erreur de géolocalisation:', error);
+          document.getElementById('result').innerText = "Erreur de géolocalisation.";
+        });
+      } else {
+        document.getElementById('result').innerText = "La géolocalisation n'est pas supportée par votre navigateur.";
+      }
+    });
+  </script>
+</body>
+</html>

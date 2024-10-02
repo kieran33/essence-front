@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carte Leaflet avec ajout dynamique de marqueurs</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Initialisation de la carte
+    const map = L.map('map').setView([48.8566, 2.3522], 5); // Vue centrée sur Paris
+
+    // Ajouter une couche de tuiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Fonction pour ajouter un marqueur lors d'un clic sur la carte
+    map.on('click', function(e) {
+      // Récupérer les coordonnées du clic
+      const lat = e.latlng.lat;
+      const lng = e.latlng.lng;
+
+      // Créer un marqueur à la position cliquée
+      const marker = L.marker([lat, lng]).addTo(map);
+
+      // Demander à l'utilisateur d'entrer un texte pour la popup
+      const content = prompt("Entrez le contenu pour la popup du marqueur :");
+
+      // Ajouter une popup au marqueur
+      if (content) {
+        marker.bindPopup(content).openPopup();
+      } else {
+        marker.bindPopup("Marqueur ajouté sans contenu.").openPopup();
+      }
+    });
+  </script>
+</body>
+</html>

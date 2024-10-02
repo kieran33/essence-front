@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carte Leaflet avec plusieurs marqueurs</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Initialisation de la carte
+    const map = L.map('map').setView([48.8566, 2.3522], 5); // Vue centrée sur Paris
+
+    // Ajouter une couche de tuiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Boucle for pour ajouter plusieurs marqueurs
+    for (let i = 0; i < 4; i++) {
+      let position;
+      let content;
+
+      // Définir les positions et le contenu en fonction de l'itération
+      switch (i) {
+        case 0:
+          position = [48.8566, 2.3522]; // Paris
+          content = "<b>Paris</b><br>Capitale de la France.";
+          break;
+        case 1:
+          position = [45.7640, 4.8357]; // Lyon
+          content = "<b>Lyon</b><br>Connu pour sa cuisine.";
+          break;
+        case 2:
+          position = [43.6047, 1.4442]; // Toulouse
+          content = "<b>Toulouse</b><br>La ville rose.";
+          break;
+        case 3:
+          position = [48.5734, 7.7521]; // Strasbourg
+          content = "<b>Strasbourg</b><br>Capitale européenne.";
+          break;
+      }
+
+      // Créer un marqueur
+      const marker = L.marker(position).addTo(map);
+      // Ajouter une popup au marqueur
+      marker.bindPopup(content);
+    }
+  </script>
+</body>
+</html>
