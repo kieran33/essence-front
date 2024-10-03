@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ouvrir Modales Dynamiques</title>
+    <!-- Inclure Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h1>Modales Dynamiques avec JavaScript</h1>
+    <div id="buttonContainer"></div> <!-- Conteneur pour les boutons -->
+    <div id="modalContainer"></div> <!-- Conteneur pour les modales générées -->
+</div>
+
+<!-- Inclure Bootstrap JavaScript pour gérer les modales -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Un tableau d'exemples à afficher dans les modales
+    const items = ['Contenu du Modal 1', 'Contenu du Modal 2', 'Contenu du Modal 3', 'Contenu du Modal 4'];
+
+    // Sélectionner les conteneurs pour les boutons et les modales
+    const buttonContainer = document.getElementById('buttonContainer');
+    const modalContainer = document.getElementById('modalContainer');
+
+    // Boucle pour créer des modales et leurs boutons correspondants
+    for (let i = 0; i < items.length; i++) {
+        // Créer une modale avec un ID unique pour chaque élément
+        const modalHTML = `
+        <div class="modal fade" id="modal${i}" tabindex="-1" aria-labelledby="modalLabel${i}" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel${i}">Modal ${i + 1}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                ${for (let j=0; j < json_parse[1][i].services.length){
+                  console.log(json_parse[1][i].services[j])
+                }}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              </div>
+            </div>
+          </div>
+        </div>`;
+        
+        // Ajouter la modale générée dans le conteneur
+        modalContainer.innerHTML += modalHTML;
+
+        // Créer un bouton pour ouvrir la modale correspondante
+        const buttonHTML = `
+        <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#modal${i}">
+          Ouvrir le Modal ${i + 1}
+        </button>`;
+
+        // Ajouter le bouton dans le conteneur des boutons
+        buttonContainer.innerHTML += buttonHTML;
+    }
+</script>
+
+</body>
+</html>

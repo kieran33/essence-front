@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer et Supprimer des Éléments et des Markers</title>
+    <!-- Inclure les fichiers CSS et JS de Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="btnToggle">Créer des éléments et des marqueurs</button>
+    <div id="conteneur"></div> <!-- Conteneur où les éléments DOM seront ajoutés -->
+    <div id="map"></div> <!-- Carte Leaflet -->
+
+    <script>
+        // Variable pour suivre l'état des éléments
+        let elementsAjoutes = false;
+
+        // Initialisation de la carte Leaflet
+        const map = L.map('map').setView([48.8566, 2.3522], 12); // Paris comme point de départ
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        let markers = [];  // Tableau pour stocker les marqueurs
+
+        // Sélectionner le bouton et le conteneur
+        const btnToggle = document.getElementById('btnToggle');
+        const conteneur = document.getElementById('conteneur');
+
+        // Fonction pour créer des éléments DOM
+        function creerElements() {
+            for (let i = 1; i <= 3; i++) {
+                let nouveauParagraphe = document.createElement('p');
+                nouveauParagraphe.textContent = `Paragraphe ${i}`;
+                nouveauParagraphe.classList.add('element-ajoute');
+                conteneur.appendChild(nouveauParagraphe);
+            }
+
+            // Ajouter des marqueurs sur la carte (par exemple, trois marqueurs autour de Paris)
+            let positions = [
+                [48.8566, 2.3522],   // Paris
+                [48.8584, 2.2945],   // Tour Eiffel
+                [48.8606, 2.3376]    // Musée du Louvre
+            ];
+
+            positions.forEach(pos => {
+                let marker = L.marker(pos).addTo(map);  // Ajouter un marqueur à la carte
+                markers.push(marker);  // Stocker le marqueur
+            });
+        }
+
+        // Fonction pour supprimer les éléments DOM et les marqueurs
+        function supprimerElements() {
+            // Supprimer les éléments DOM
+            let elements = document.querySelectorAll('.element-ajoute');
+            elements.forEach(element => element.remove());
+
+            // Supprimer les marqueurs de la carte
+            markers.forEach(marker => {
+                map.removeLayer(marker);
+            });
+            markers = [];  // Réinitialiser le tableau des marqueurs
+        }
+
+        // Ajouter un gestionnaire d'événements pour le bouton
+        btnToggle.addEventListener('click', function() {
+            if (!elementsAjoutes) {
+                creerElements();  // Créer les éléments et les marqueurs
+                btnToggle.textContent = "Supprimer les éléments et les marqueurs";
+            } else {
+                supprimerElements();  // Supprimer les éléments et les marqueurs
+                btnToggle.textContent = "Créer des éléments et des marqueurs";
+            }
+            elementsAjoutes = !elementsAjoutes;  // Inverser l'état
+        });
+    </script>
+
+</body>
+</html>

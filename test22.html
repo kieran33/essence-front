@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer et Supprimer des Éléments</title>
+</head>
+<body>
+
+    <button id="btnToggle">Créer des éléments</button>
+    <div id="conteneur"></div>
+
+    <script>
+        let elementsAjoutes = false;  // Indicateur pour savoir si les éléments sont créés
+
+        // Sélectionner le bouton et le conteneur
+        const btnToggle = document.getElementById('btnToggle');
+        const conteneur = document.getElementById('conteneur');
+
+        // Fonction qui crée des éléments
+        function creerElements() {
+            for (let i = 1; i <= 3; i++) {
+                let nouveauParagraphe = document.createElement('p');
+                nouveauParagraphe.textContent = `Paragraphe ${i}`;
+                nouveauParagraphe.classList.add('element-ajoute'); // Ajouter une classe pour identifier les éléments créés
+                conteneur.appendChild(nouveauParagraphe);
+            }
+        }
+
+        // Fonction qui supprime les éléments créés
+        function supprimerElements() {
+            // Supprimer tous les éléments ayant la classe 'element-ajoute'
+            let elements = document.querySelectorAll('.element-ajoute');
+            elements.forEach(element => element.remove());
+        }
+
+        // Ajouter un gestionnaire d'événements pour le bouton
+        btnToggle.addEventListener('click', function() {
+            if (!elementsAjoutes) {
+                creerElements();  // Créer les éléments
+                btnToggle.textContent = "Supprimer les éléments";  // Changer le texte du bouton
+            } else {
+                supprimerElements();  // Supprimer les éléments
+                btnToggle.textContent = "Créer des éléments";  // Remettre le texte initial
+            }
+            elementsAjoutes = !elementsAjoutes;  // Inverser l'état
+        });
+    </script>
+
+</body>
+</html>
